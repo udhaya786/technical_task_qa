@@ -83,11 +83,11 @@ We expect that these functions will be tested both manually and automatically by
 
 ### Automated tests - using Espresso or any other tool of your choosing (explain why)
 
-At Sliide we love clean code, so please try to write your tests neatly. 
+* At Sliide we love clean code, so please try to write your tests neatly. 
 
-It’s not mandatory but using an additional abstraction level for your tests (like your own framework to facilitate writing tests) will be very much appreciated
+* It’s not mandatory but using an additional abstraction level for your tests (like your own framework to facilitate writing tests) will be very much appreciated
 
-You can access the android project with implemented features below. 
+* As a note, we won't consider any automation task submission created with a test recorder.
 
 
 At Sliide we highly appreciate good communication at all times so, if you have any questions, don’t hesitate to ask   
