@@ -1,96 +1,58 @@
-# Sliide QA Technical Test
-## Congratulations, you have reached the next stage which is solving a Sliide practical test.
-##### Please create your own repo and share the solution with us
+# News App
 
-### Description
-During the test we'd like you to imagine yourself as a member of our team, which has a collective goal of getting our sprint tasks completed.
+A clean and modern Android application for viewing news articles, built with Jetpack Compose. This app features a persistent login state and a clean UI to display a list of news articles.
 
-Let’s start!
+# Features
 
-We are in the middle of the sprint and the following 2 user stories were just moved to the QA testing column on our Jira board:
+User Authentication:  Secure login with username and password.
+Persistent Login:  The user's login state is saved, so they don't have to log in every time the app is restarted.
+News Feed: A dynamic feed of news articles with images.
+Modern UI: Built entirely with Jetpack Compose for a declarative and responsive user interface.
+*Dependency Injection:Uses Hilt for a scalable and maintainable architecture.
 
-##
-### 1 - As a user I want to log in to the app
+# Tech Stack
 
-#### Scenario 1 - user opens the android app first time (when not logged in yet)
+Language: Kotlin
+UI Toolkit:  Jetpack Compose
+Architecture: MVVM (Model-View-View Model)
+Dependency Injection:  Hilt
+Data Persistence: Shared Preferences (for login state)
 
-Given - The user opens the app for the first time (when not logged in yet)
 
-Then - The login screen with user name and password entries and login button is displayed
+## Automated Testing
 
-#### Scenario 2 - User login failed
+Automated UI testing using Jetpack Compose Test API
+Test coverage for core UI components and interactions
+Semantic tagging of Compose components for easier testing New test files and configurations added under src/androidTest/
 
-Given - The user provided wrong user name and/or password
 
-When - The Login button is clicked
+### Test Tool Choice: Jetpack Compose Test
 
-Then - The error markers are displayed by user name and/or password entries
+This project uses Jetpack Compose Test for all UI test. This decision was made because Compose Test is the official, purpose-built framework for testing Jetpack Compose applications.
 
-#### Scenario 3 - User login succeed (credentials provided below)
+The key reasons for choosing Compose Test over other tools like Espresso are:
 
-Given - The user provided correct credentials
+•	Native to Compose: It directly understands the declarative nature of your UI, working with a "semantic tree" rather than the traditional Android View hierarchy. This makes tests more robust to layout changes.
+•	Automatic Synchronization: Compose Test automatically waits for UI changes and state updates, which dramatically reduces test flakiness and the need for manual waits.
+•	Faster Execution: UI tests can be run on the JVM without an emulator, providing rapid feedback during the development cycle.
+•	Robustness: It uses `testTag` semantics for locating elements, which is a more reliable and intentional method for testing than relying on view resource IDs.
 
-When - Login button is clicked
 
-Then - User is taken to the news screen
+## Manual Test Cases
 
-#### Scenario 4 - User opens app next time (when previously logged in)
+These manual test cases can be used to verify the app's behaviour by a human tester.
 
-Given -The user opens app next time (when previously logged in)
+| Test Case | Steps | Expected Result |
+| Verify Valid Login| 1. Open the app. <br> 2. Enter `correctUser` and `correctPass`. <br> 3. Click the "Login" button. | The app navigates to the News screen. |
+| Verify Invalid Login | 1. Open the app. <br> 2. Enter `incorrectUser` and `incorrectPass`. <br> 3. Click the "Login" button. | An error message is displayed below the login fields. The app stays on the Login screen. |
+| Verify Persistent Login| 1. Perform a valid login. <br> 2. Close the app completely (swipe it away from recent apps). <br> 3. Reopen the app. | The app bypasses the Login screen and opens directly to the News screen. |
 
-Then - User is taken straight to the news screen
+### Test File Structure and Execution
 
- ##
+All instrumentation tests are located in the `app/src/androidTest/java/com/test/news/` directory.
 
-### 2 - As a user I want to see my news
+### To run the tests: 
 
-#### Scenario 1 - News images are loaded
-
-Given - The user successfully logged in to the app
-
-When - There is internet connection
-
-Then - Images are displayed in the rows on the list (row can have one or more images scrollable horizontally)
-
-#### Scenario 2 - Failed to load images
-
-Given - The user successfully logged in to the app
-
-When - There is no internet connection
-
-Then - “Failed to load news” error message is displayed with a Retry button
-
-#### Scenario 3 - News card is clicked
-
-Given - The news cards are successfully loaded on the screen
-
-When - The user clicks one of the cards
-
-Then - User is navigated to the external browser with a corresponding article loaded
-
-#### Login credentials:
-#### user: password
-#### password: password
-
-##
-
-Now it’s your turn. You need to verify if we can move these two tickets to the Done column on our Jira board.
-We expect that these functions will be tested both manually and automatically by you.
-
-### Manual tests - We expect that any bugs will be reported in clear form
-
-### Automated tests - Using jetpack compose test or any other tool of your choosing (explain why)
-
-* At Sliide we love clean code so please try to write your tests neatly.
-
-* It’s not mandatory but using an additional abstraction level for your tests (like POM or your own framework to facilitate writing tests) will be very much appreciated
-
-* As a note, we won't consider any automation task submission created with a test recorder.
-
-At Sliide we highly appreciate good communication at all times. If you have any questions, please don’t hesitate to ask us :)
-
-### Next Steps
-Once we have received your test along with any other documentation which you feel is necessary for your submission, we will review it. If we like what we see, we'll invite you into our office for
-a face to face discussion where we’ll ask you to go through your test, explaining any decisions that you've made.
-
-## Good luck!
+1.  Open Android Studio.
+2.  Navigate to the specific test file you want to run (e.g., `LoginScreenTest.kt`).
+3.  Click the green play button next to the test class or an individual test function.
